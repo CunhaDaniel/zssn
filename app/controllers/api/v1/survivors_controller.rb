@@ -18,6 +18,14 @@ class Api::V1::SurvivorsController < ApplicationController
     end
   end
 
+  def show  
+    survivor = Survivor.find_by (id: params [:id])
+    if survivor
+      render json: @survivor, status: 200
+    else
+      render json:{error: 'Error show survivor'}
+    end
+  end
   private
     def survivor_params
       params.permit([
