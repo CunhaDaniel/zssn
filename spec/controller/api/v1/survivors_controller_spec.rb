@@ -5,27 +5,23 @@ RSpec.describe Api::V1::SurvivorsController, type: :controller do
   let!(:survivor1) { create(:survivor) }
   let!(:survivor2) { create(:survivor) }
 
-
   describe 'POST#create' do
     context 'with valid params' do
-      let(:valid_params) do 
-        { name: 'Daniel', 
-          age: 25, 
-          gender: 'Male'} 
+      let(:valid_params) do
+        { name: 'Daniel',
+          age: 25,
+          gender: 'Male' }
       end
-      
       it 'returns http success' do
         post :create, params: valid_params
         expect(response).to have_http_status(:success)
       end
-    
       it 'increase survivors by one' do
         post :create, params: valid_params
-        expect(Survivor.last).to have_attributes valid_params 
+        expect(Survivor.last).to have_attributes valid_params
       end
     end
   end
-
 
   describe 'GET#show' do
     before { get :show, params: { id: survivor.id } }
