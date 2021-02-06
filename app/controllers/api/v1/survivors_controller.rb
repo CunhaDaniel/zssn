@@ -10,11 +10,20 @@ class Api::V1::SurvivorsController < ApplicationController
       age: survivor_params[:age],
       gender: survivor_params[:gender]
     )
-
+    
     if survivor.save
       render json: survivor, status: 200
     else
-      render json: { error: 'Error create survivor' }
+      render json: { error: 'Error when create survivor' }
+    end
+  end
+
+  def show  
+    survivor = Survivor.find_by(id: params[:id])
+    if survivor
+      render json: survivor, status: 200
+    else
+      render json:{error: 'Error show survivor'}
     end
   end
 
